@@ -30,17 +30,16 @@ const PasswordCheck_PrivUser = {
       //"MustNotContain" : ['admin','password'],//must not contain strs, case sensitive
       "CustomValidate" : (password) => { return "";}, //return error string if false, return "" if true
     };
+
 const passwordCheckUser = new PasswordComplexityRules(PasswordCheck_User, {}, "policyC_user");
 const passwordCheckPrivUser = new PasswordComplexityRules(PasswordCheckPriv_User, {}, "policyC_admin");
 
 
 
 const PasswordChange_User = {
-	  "PasswordChangePeriod" : 90, //skol'ko dney dejstvuet parol'
-      "NotificationGap" : 15, //za skolko nado predupregdat 
-	  "ActionAfreChangePeriod" : 0, // 0 - prodolzhaem preduprezhdat', 1 - blokiruem pol'zovatelya
-	  "PasswordChange"
-
+       "PasswordChangePeriod" : 90, //skol'ko dney dejstvuet parol'
+        "NotificationGap" : 15, //za skolko dney nado predupregdat 
+	"ActionAfreChangePeriod" : 0, // 0 - prodolzhaem preduprezhdat', 1 - blokiruem pol'zovatelya
     };
 	
 const passwordChangeUser = new PasswordChangeRules(PasswordChange_User, {}, "policyCh_user");	
@@ -51,11 +50,12 @@ const PasswordBlock_User = {
 	//"PermanentBlockCounterResetPeriod" : 600 // interval v sekundaх sbrosa schetchika postoyannoj blokirovki
 	  "isFailAuthTemporarytBlock" = : 1,  //  0  - ne primenyaem pravilo vremennoj blokirovki 1 - primenyaem pravilo vremennoj blokirovki
       "TemporarytBlockFailCount" : 5, //skol'ko dney dejstvuet parol'
-	  "PermanentBlockCounterResetPeriod" : 600 // interval v minutakh sbrosa vremennoj schetchika  blokirovki
-
+      "PermanentBlockCounterResetPeriod" : 600 // interval v minutakh sbrosa vremennoj schetchika  blokirovki
     };
+
+const passwordBlockUser = new PasswordBlockRules (PasswordBlock_User, {}, "policyB_user");	
 	
-export class PasswordPolicy {
+export class PasswordComplexityRules  {
     //current policyName:
     public policyName = "";
     //all policies
